@@ -11,5 +11,5 @@ On va considérer quatre manières de représenter une image en couleur et donc 
 
 ## Membres du projet
 
-- NOM, prénom, numéro de groupe, du premier participant
-- NOM, prénom, numéro de groupe, du deuxième participant
+- Bardaghji, Georges, Groupe 3, du premier participant
+- Hiraki, Ahamad, Groype 3, du deuxième participant
