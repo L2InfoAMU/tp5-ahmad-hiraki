@@ -1,58 +1,66 @@
 package image;
 import static util.Matrices.*;
 import javafx.scene.paint.Color;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PaletteRasterImage implements Image {
+public class PaletteRasterImage extends RasterImage {
 
+    private List<Color> palette;
     private int width;
     private int height;
-    private Color [][] pixels;
+    private int [][] pixels;
 
     public PaletteRasterImage(Color color, int width, int height) {
 
         this.height = height;
         this.width = width;
-        pixels = new Color [width][height];
-        for (int x = 0; x < height; x++)
-            for (int y = 0; y < width; y++)
-                this.pixels [x][y] = color;
+        createRepresentation();
+        setPixelsColor(color);
     }
 
     public PaletteRasterImage(Color[][] pixels) {
 
-        this.pixels = pixels;
+
         this.height = getColumnCount(pixels);
         this.width = getRowCount(pixels);
+        createRepresentation();
+        setPixelsColor(pixels);
+        requiresNonNull(pixels);
+        requiresNonZeroDimensions(pixels);
+        requiresRectangularMatrix(pixels);
 
     }
 
     public void createRepresentation(){
-
-        pixels = new Color[this.width][this.height];
+        palette = new ArrayList<>();
+        pixels = new int [this.width][this.height];
     }
 
     public void setPixelColor(Color color, int x, int y){
 
-        pixels[x][y] = color;
+        if (!palette.contains(color))
+            palette.add(color);
+        pixels[x][y] = palette.indexOf(color);
     }
 
     public Color getPixelColor(int x, int y){
 
-        return pixels[x][y];
+        return palette.get(pixels[x][y]);
     }
 
-    private void setPixelsColor(Color[][] pixels){
+    public void setPixelsColor(Color[][] pixels){
 
-        for ( int x = 0; x < getColumnCount(pixels); x++)
-            for (int y = 0; y < getRowCount(pixels); y++)
-                this.pixels[x][y] = pixels [x][y];
+        for ( int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                setPixelColor(pixels[x][y], x, y);
     }
 
     private void setPixelsColor(Color color){
 
         for ( int x = 0; x < height; x++)
             for ( int y = 0; y < width; y++)
-                pixels[x][y] = color;
+                setPixelColor(color, x, y);
     }
 
     public int getWidth(){

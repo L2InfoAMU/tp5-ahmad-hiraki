@@ -3,7 +3,7 @@ import java.awt.*;
 import static util.Matrices.*;
 import javafx.scene.paint.Color;
 
-public class BruteRasterImage implements Image {
+public class BruteRasterImage extends RasterImage {
 
     private int width;
     private int height;
