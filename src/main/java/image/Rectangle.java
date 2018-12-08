@@ -10,6 +10,7 @@ public class Rectangle implements Shape {
     private Point leftHigh;
 
     public Rectangle(int x, int y, int width, int height, Color color) {
+
         this.width = width;
         this.height = height;
         this.color = color;
@@ -17,11 +18,15 @@ public class Rectangle implements Shape {
     }
 
     public boolean contains(Point point){
+
         boolean width = (leftHigh. x <= point.x && point.x <= leftHigh.x + this.width);
         boolean height = (leftHigh.y <= point.y && point.y <= leftHigh.y + this.height);
         return (width && height);
     }
 
-    public Color getColor(){return this.color; }
+    public Color getColor(){
+
+        return this.color;
+    }
 
 }
